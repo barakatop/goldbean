@@ -1,0 +1,687 @@
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#FAF7EF;--warm:#FFFCF5;--espresso:#1E1108;--roast:#3D1F0A;
+  --gold:#C8962A;--gold-lt:#F0C355;--gold-pale:#FDF3DC;--gold-border:#E8C87A;
+  --sage:#6B7C5E;--text:#1A0C05;--muted:#8A6A45;--border:#EAE0CC;--card:#FFFDF8;
+  --new-badge:#E8F5E3;--new-text:#2D6B1F;--cold-badge:#E3EEF8;--cold-text:#1A4A8C;
+  --sig-badge:#FDF3DC;--sig-text:#7A5010;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--cream);color:var(--text);font-size:15px;line-height:1.6}
+a{text-decoration:none;color:inherit}
+
+/* ── LOGO SVG BEAN ── */
+.bean-logo{display:inline-flex;align-items:center;gap:9px;cursor:pointer}
+.bean-svg{width:28px;height:28px;flex-shrink:0}
+.logo-text{font-family:'Playfair Display',Georgia,serif;font-size:1.25rem;color:var(--espresso);letter-spacing:0.02em;font-weight:600}
+.logo-text span{color:var(--gold)}
+
+/* ── NAV ── */
+nav{background:rgba(250,247,239,0.97);border-bottom:1px solid var(--border);padding:0 1.5rem;position:sticky;top:0;z-index:200}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px}
+.nav-links{display:flex;gap:2px;list-style:none}
+.nav-links a{padding:7px 13px;font-size:12.5px;font-weight:500;color:var(--muted);border-radius:6px;transition:all .18s;letter-spacing:.04em;text-transform:uppercase}
+.nav-links a:hover,.nav-links a.active{color:var(--espresso);background:var(--gold-pale)}
+.nav-cta{background:var(--espresso)!important;color:#fff!important;border-radius:18px!important;padding:7px 18px!important}
+.nav-cta:hover{background:var(--roast)!important;color:#fff!important}
+.nav-staff{background:transparent!important;color:var(--gold)!important;border:1px solid var(--gold-border)!important;border-radius:18px!important;padding:7px 16px!important;margin-left:6px}
+.nav-staff:hover{background:var(--gold-pale)!important}
+
+/* ── PAGES ── */
+.page{display:none;animation:fade .28s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── HERO ── */
+.hero{background:var(--espresso);color:#fff;padding:5rem 2rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 65% 35%,rgba(200,150,42,0.22),transparent 60%)}
+.hero-inner{max-width:680px;margin:0 auto;position:relative}
+.hero-tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-lt);border:1px solid rgba(240,195,85,.35);padding:5px 14px;border-radius:20px;margin-bottom:1.4rem}
+.hero h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.1;margin-bottom:1.1rem;font-weight:500}
+.hero h1 em{color:var(--gold-lt);font-style:italic}
+.hero p{font-size:.95rem;color:rgba(255,255,255,.6);max-width:440px;margin:0 auto 2.4rem;font-weight:300}
+.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-p{background:var(--gold);color:var(--espresso);padding:12px 26px;border-radius:22px;border:none;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .18s;font-family:inherit}
+.btn-p:hover{background:var(--gold-lt);transform:translateY(-1px)}
+.btn-o{background:transparent;color:#fff;padding:12px 26px;border-radius:22px;border:1px solid rgba(255,255,255,.28);font-size:13.5px;font-weight:500;cursor:pointer;transition:all .18s;font-family:inherit}
+.btn-o:hover{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.07)}
+.hero-stats{display:flex;gap:2rem;justify-content:center;margin-top:3rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap}
+.stat-num{font-family:'Playfair Display',Georgia,serif;font-size:1.7rem;color:var(--gold-lt);display:block;font-weight:500}
+.stat-label{font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-top:1px}
+
+/* ── SECTION ── */
+.section{padding:3.5rem 2rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.s-tag{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.s-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.7rem,3vw,2.4rem);color:var(--espresso);font-weight:500;line-height:1.2}
+.s-sub{color:var(--muted);margin-top:.5rem;font-weight:300;max-width:480px}
+.s-header{text-align:center;margin-bottom:2.5rem}
+.s-header .s-sub{margin-left:auto;margin-right:auto}
+
+/* ── MENU ── */
+.menu-tabs{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+.menu-tab{padding:7px 18px;border-radius:18px;border:1px solid var(--border);background:transparent;font-size:12.5px;font-weight:500;cursor:pointer;color:var(--muted);transition:all .18s;font-family:inherit}
+.menu-tab.active,.menu-tab:hover{background:var(--espresso);color:#fff;border-color:var(--espresso)}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.menu-cat{display:none}
+.menu-cat.active{display:grid}
+.m-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.2rem 1.3rem;transition:all .18s}
+.m-card:hover{box-shadow:0 3px 18px rgba(30,17,8,.07);transform:translateY(-1px)}
+.m-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.35rem}
+.m-name{font-family:'Playfair Display',Georgia,serif;font-size:1rem;color:var(--espresso)}
+.m-name-ar{font-size:.8rem;color:var(--muted);font-weight:400;direction:rtl}
+.m-price{font-size:.85rem;font-weight:600;color:var(--gold);white-space:nowrap;margin-left:8px}
+.m-desc{font-size:12.5px;color:var(--muted);line-height:1.5;font-weight:300}
+.m-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.75rem}
+.badge{font-size:10px;font-weight:600;padding:3px 9px;border-radius:9px;letter-spacing:.02em}
+.badge-hot{background:#FEF0E0;color:#8A4A10}
+.badge-cold{background:var(--cold-badge);color:var(--cold-text)}
+.badge-sig{background:var(--sig-badge);color:var(--sig-text)}
+.badge-new{background:var(--new-badge);color:var(--new-text)}
+.add-btn{background:var(--espresso);color:#fff;border:none;width:26px;height:26px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .18s;flex-shrink:0}
+.add-btn:hover{background:var(--gold)}
+.addons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:1rem}
+.addon-card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:.9rem 1.1rem;display:flex;justify-content:space-between;align-items:center}
+.addon-name{font-size:13.5px;color:var(--espresso)}
+.addon-name-ar{font-size:11px;color:var(--muted);direction:rtl}
+.addon-price{font-weight:600;color:var(--gold);font-size:13.5px}
+
+/* ── ABOUT ── */
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
+.about-visual{background:var(--espresso);border-radius:18px;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.about-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 65%,rgba(200,150,42,.35),transparent 58%)}
+.about-vis-inner{position:relative;z-index:1;text-align:center}
+.about-bean{margin:0 auto;display:block}
+.about-text h2{font-family:'Playfair Display',Georgia,serif;font-size:1.9rem;color:var(--espresso);line-height:1.2;margin-bottom:1.1rem}
+.about-text p{color:var(--muted);margin-bottom:.9rem;font-weight:300;line-height:1.7}
+.values{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:1.8rem}
+.val{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:.9rem}
+.val-icon{font-size:1.1rem;margin-bottom:.3rem}
+.val-title{font-weight:600;font-size:12.5px;color:var(--espresso);margin-bottom:.1rem}
+.val-desc{font-size:11.5px;color:var(--muted)}
+
+/* ── ORDER ── */
+.order-wrap{display:grid;grid-template-columns:1fr 340px;gap:2rem}
+.order-toggle{display:flex;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:3px;gap:3px;margin-bottom:1.8rem;width:fit-content}
+.o-type{padding:7px 22px;border-radius:8px;border:none;background:transparent;font-size:12.5px;font-weight:500;cursor:pointer;color:var(--muted);font-family:inherit;transition:all .18s}
+.o-type.active{background:var(--espresso);color:#fff}
+.o-items{display:grid;gap:9px;margin-bottom:1.5rem}
+.o-item{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:.9rem 1.1rem;display:flex;justify-content:space-between;align-items:center}
+.o-item-name{font-weight:500;font-size:13.5px;color:var(--espresso);margin-bottom:2px}
+.o-item-desc{font-size:11.5px;color:var(--muted)}
+.o-right{display:flex;align-items:center;gap:10px}
+.qty{display:flex;align-items:center;gap:5px;background:var(--gold-pale);border-radius:18px;padding:3px 9px}
+.qty-btn{background:none;border:none;font-size:14px;cursor:pointer;color:var(--roast);font-weight:600;width:16px;text-align:center}
+.qty-n{font-size:12.5px;font-weight:600;color:var(--espresso);min-width:14px;text-align:center}
+.o-price{font-weight:600;color:var(--gold);font-size:13px;min-width:52px;text-align:right}
+.cart-panel{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;height:fit-content;position:sticky;top:74px}
+.cart-title{font-family:'Playfair Display',Georgia,serif;font-size:1.05rem;color:var(--espresso);margin-bottom:1.1rem;padding-bottom:.9rem;border-bottom:1px solid var(--border)}
+.cart-empty{color:var(--muted);font-size:12.5px;text-align:center;padding:1.2rem 0}
+.cart-row{display:flex;justify-content:space-between;font-size:12.5px;padding:4px 0;color:var(--muted)}
+.cart-total-row{display:flex;justify-content:space-between;font-weight:600;font-size:14px;color:var(--espresso);padding-top:.9rem;margin-top:.4rem;border-top:1px solid var(--border)}
+.f-group{margin-bottom:.9rem}
+.f-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;display:block}
+.f-input{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:9px;font-size:13.5px;font-family:inherit;background:var(--warm);color:var(--text);outline:none;transition:border-color .18s}
+.f-input:focus{border-color:var(--gold)}
+.f-select{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:9px;font-size:13.5px;font-family:inherit;background:var(--warm);color:var(--text);outline:none;appearance:none}
+.checkout-btn{width:100%;padding:13px;background:var(--espresso);color:#fff;border:none;border-radius:22px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .18s;margin-top:.9rem}
+.checkout-btn:hover{background:var(--gold);color:var(--espresso)}
+.o-section-title{font-family:'Playfair Display',Georgia,serif;font-size:1.15rem;color:var(--espresso);margin-bottom:1rem}
+
+/* ── LOCATION ── */
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.map-ph{background:var(--espresso);border-radius:14px;height:380px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.map-ph::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(200,150,42,.3),transparent 55%)}
+.map-caption{position:absolute;bottom:14px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15);color:#fff;padding:7px 18px;border-radius:18px;font-size:12px;z-index:1}
+.loc-info{display:flex;flex-direction:column;gap:13px}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.2rem 1.3rem}
+.ic-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:.9rem}
+.hr-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:13px}
+.hr-row:last-child{border-bottom:none}
+.hr-day{color:var(--muted)}
+.hr-time{font-weight:500;color:var(--espresso)}
+.hr-row.today .hr-day,.hr-row.today .hr-time{color:var(--gold);font-weight:600}
+.open-pill{display:inline-flex;align-items:center;gap:5px;background:#E3F5E3;color:#1C6B1C;font-size:11.5px;font-weight:600;padding:4px 12px;border-radius:9px;margin-bottom:.9rem}
+.open-dot{width:6px;height:6px;background:#3DB83D;border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+.c-row{display:flex;align-items:center;gap:9px;padding:5px 0;font-size:13px;color:var(--muted)}
+.c-icon{width:28px;height:28px;background:var(--gold-pale);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+
+/* ── STAFF LOGIN OVERLAY ── */
+#staff-overlay{display:none;background:rgba(30,17,8,.7);min-height:600px;align-items:center;justify-content:center;padding:2rem}
+#staff-overlay.show{display:flex}
+.login-box{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:2.5rem 2rem;width:100%;max-width:360px}
+.login-logo{text-align:center;margin-bottom:1.5rem}
+.login-title{font-family:'Playfair Display',Georgia,serif;font-size:1.5rem;color:var(--espresso);text-align:center;margin-bottom:.4rem}
+.login-sub{font-size:13px;color:var(--muted);text-align:center;margin-bottom:1.8rem}
+.login-err{background:#FEE;border:1px solid #F5C1C1;color:#8B2020;font-size:12.5px;padding:8px 12px;border-radius:8px;margin-bottom:1rem;display:none}
+.login-btn{width:100%;padding:12px;background:var(--espresso);color:#fff;border:none;border-radius:20px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .18s;margin-top:.5rem}
+.login-btn:hover{background:var(--gold);color:var(--espresso)}
+.login-hint{font-size:11.5px;color:var(--muted);text-align:center;margin-top:1rem;line-height:1.5}
+
+/* ── KITCHEN DASHBOARD ── */
+#kitchen{display:none}
+#kitchen.show{display:block}
+.kd-header{background:var(--espresso);color:#fff;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.kd-header-left{display:flex;align-items:center;gap:12px}
+.kd-title{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem}
+.kd-live{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.55)}
+.kd-live-dot{width:6px;height:6px;background:#4ADE80;border-radius:50%;animation:blink 1.5s infinite}
+.kd-logout{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:6px 16px;border-radius:14px;font-size:12px;cursor:pointer;font-family:inherit}
+.kd-logout:hover{background:rgba(255,255,255,.18)}
+.kd-body{padding:1.5rem;background:var(--cream);min-height:500px}
+.kd-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1.5rem}
+.kd-stat{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:.9rem;text-align:center}
+.kd-stat-num{font-family:'Playfair Display',Georgia,serif;font-size:1.6rem;color:var(--gold);display:block;font-weight:500}
+.kd-stat-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.kd-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.kd-col-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.9rem;padding-bottom:.7rem;border-bottom:2px solid}
+.kd-col-title.new{color:#C8520A;border-color:#C8520A}
+.kd-col-title.prep{color:#8A6A10;border-color:#D4A420}
+.kd-col-title.done{color:#1C6B1C;border-color:#4AB84A}
+.order-card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:1rem;margin-bottom:10px;transition:all .2s}
+.order-card:hover{border-color:var(--gold-border)}
+.oc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem}
+.oc-id{font-weight:700;font-size:13px;color:var(--espresso)}
+.oc-type{font-size:10.5px;padding:2px 8px;border-radius:7px;font-weight:600}
+.oc-pickup{background:#E8F5E3;color:#1C6B1C}
+.oc-delivery{background:#E3EEF8;color:#1A4A8C}
+.oc-name{font-size:12px;color:var(--muted);margin-bottom:.5rem}
+.oc-items{list-style:none;margin-bottom:.7rem}
+.oc-items li{font-size:12.5px;color:var(--text);padding:2px 0;display:flex;align-items:center;gap:5px}
+.oc-items li::before{content:'·';color:var(--gold);font-weight:700}
+.oc-total{font-weight:600;font-size:12.5px;color:var(--espresso);border-top:1px solid var(--border);padding-top:.5rem;margin-top:.3rem}
+.oc-time{font-size:11px;color:var(--muted);margin-top:3px}
+.oc-actions{display:flex;gap:6px;margin-top:.7rem}
+.oc-btn{flex:1;padding:6px;border:none;border-radius:7px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .18s}
+.oc-btn-adv{background:var(--espresso);color:#fff}
+.oc-btn-adv:hover{background:var(--gold);color:var(--espresso)}
+.oc-btn-del{background:#FEE;color:#8B2020;border:1px solid #F5C1C1}
+.oc-btn-del:hover{background:#F5C1C1}
+.kd-empty{color:var(--muted);font-size:13px;padding:1.5rem 0;text-align:center}
+.kd-sound{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.55);cursor:pointer}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:18px;right:18px;background:var(--espresso);color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:500;z-index:9999;transform:translateY(60px);opacity:0;transition:all .28s;max-width:260px}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ── RESPONSIVE ── */
+@media(max-width:760px){
+  .about-layout,.loc-grid,.order-wrap{grid-template-columns:1fr}
+  .about-visual{display:none}
+  .nav-links li:nth-child(n+3):not(:last-child):not(:nth-last-child(2)){display:none}
+  .kd-cols{grid-template-columns:1fr}
+  .kd-stats{grid-template-columns:repeat(2,1fr)}
+  .hero h1{font-size:2rem}
+}
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+<nav>
+  <div class="nav-inner">
+    <div class="bean-logo" onclick="showPage('home')">
+      <svg class="bean-svg" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="14" cy="14" rx="10" ry="13" fill="#C8962A" transform="rotate(-18 14 14)"/>
+        <ellipse cx="14" cy="14" rx="10" ry="13" rx="9.5" ry="12.5" fill="none" stroke="#1E1108" stroke-width="0.6" transform="rotate(-18 14 14)"/>
+        <path d="M9 7 Q14 14 9 21" stroke="#1E1108" stroke-width="1.4" stroke-linecap="round" fill="none" transform="rotate(-18 14 14)"/>
+        <ellipse cx="14" cy="14" rx="10" ry="13" fill="url(#bsh)" transform="rotate(-18 14 14)" opacity="0.18"/>
+        <defs><radialGradient id="bsh" cx="70%" cy="35%"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#000"/></radialGradient></defs>
+      </svg>
+      <span class="logo-text">Gold<span>Bean</span></span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showPage('home');return false" id="nl-home" class="active">Home</a></li>
+      <li><a href="#" onclick="showPage('menu');return false" id="nl-menu">Menu</a></li>
+      <li><a href="#" onclick="showPage('about');return false" id="nl-about">Our Story</a></li>
+      <li><a href="#" onclick="showPage('location');return false" id="nl-location">Visit</a></li>
+      <li><a href="#" onclick="showPage('order');return false" id="nl-order" class="nav-cta">Order Now</a></li>
+      <li><a href="#" onclick="showStaffLogin();return false" class="nav-staff" id="nl-staff">Staff ⚑</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">Specialty Coffee · Alexandria, Egypt</div>
+      <h1>Where every sip<br>finds its <em>golden moment</em></h1>
+      <p>Single-origin beans, brewed with intention. Our roasts are honest, our cups are warm.</p>
+      <div class="hero-btns">
+        <button class="btn-p" onclick="showPage('order')">Order for Pickup</button>
+        <button class="btn-o" onclick="showPage('menu')">View Menu</button>
+      </div>
+      <div class="hero-stats">
+        <div><span class="stat-num">14</span><span class="stat-label">Recipes</span></div>
+        <div><span class="stat-num">Alex</span><span class="stat-label">City</span></div>
+        <div><span class="stat-num">6am</span><span class="stat-label">Opens</span></div>
+        <div><span class="stat-num">EGP</span><span class="stat-label">Local prices</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="section" style="background:var(--warm)">
+    <div class="section-inner">
+      <div class="s-header">
+        <div class="s-tag">What we serve</div>
+        <div class="s-title">Crafted to order, every time</div>
+        <div class="s-sub">Oat milk and alternative milks available for all drinks.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:13px">
+        <div class="m-card" style="text-align:center;cursor:pointer" onclick="showPage('menu')">
+          <div style="font-size:2.2rem;margin-bottom:.7rem">☕</div>
+          <div style="font-family:'Playfair Display',Georgia,serif;font-size:.95rem;color:var(--espresso);margin-bottom:.25rem">Espresso Bar</div>
+          <div style="font-size:11.5px;color:var(--muted)">Lattes, cortados, cappuccinos</div>
+        </div>
+        <div class="m-card" style="text-align:center;cursor:pointer" onclick="showPage('menu')">
+          <div style="font-size:2.2rem;margin-bottom:.7rem">🧊</div>
+          <div style="font-family:'Playfair Display',Georgia,serif;font-size:.95rem;color:var(--espresso);margin-bottom:.25rem">Cold Drinks</div>
+          <div style="font-size:11.5px;color:var(--muted)">Iced lattes, matcha, americano</div>
+        </div>
+        <div class="m-card" style="text-align:center;cursor:pointer" onclick="showPage('menu')">
+          <div style="font-size:2.2rem;margin-bottom:.7rem">🍵</div>
+          <div style="font-family:'Playfair Display',Georgia,serif;font-size:.95rem;color:var(--espresso);margin-bottom:.25rem">Non-Coffee</div>
+          <div style="font-size:11.5px;color:var(--muted)">Matcha latte, herbal tea</div>
+        </div>
+        <div class="m-card" style="text-align:center;cursor:pointer" onclick="showPage('menu')">
+          <div style="font-size:2.2rem;margin-bottom:.7rem">✨</div>
+          <div style="font-family:'Playfair Display',Georgia,serif;font-size:.95rem;color:var(--espresso);margin-bottom:.25rem">Signatures</div>
+          <div style="font-size:11.5px;color:var(--muted)">Honey Oat, Brown Sugar & more</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MENU -->
+<div id="page-menu" class="page">
+  <div class="section">
+    <div class="section-inner">
+      <div class="s-header">
+        <div class="s-tag">Full Menu — قائمتنا</div>
+        <div class="s-title">Drink it in</div>
+        <div class="s-sub">All prices in EGP · Oat milk +15 EGP · Extra shot +15 EGP · Syrups +10 EGP</div>
+      </div>
+      <div class="menu-tabs">
+        <button class="menu-tab active" onclick="switchCat('espresso',this)">Espresso إسبريسو</button>
+        <button class="menu-tab" onclick="switchCat('cold',this)">Cold مشروبات باردة</button>
+        <button class="menu-tab" onclick="switchCat('noncoffee',this)">Non-Coffee بدون قهوة</button>
+        <button class="menu-tab" onclick="switchCat('signature',this)">Signature مميزة</button>
+        <button class="menu-tab" onclick="switchCat('addons',this)">Add-ons إضافات</button>
+      </div>
+
+      <div id="cat-espresso" class="menu-cat menu-grid active">
+        <div class="m-card"><div class="m-top"><div><div class="m-name">Espresso <span class="m-name-ar">إسبريسو</span></div></div><div class="m-price">45 / 55 EGP</div></div><div class="m-desc">Double ristretto pull. Golden crema, notes of dark chocolate and dried cherry. 7g or 14g freshly ground.</div><div class="m-footer"><span class="badge badge-hot">Hot</span><button class="add-btn" onclick="addItem('Espresso',45)">+</button></div></div>
+        <div class="m-card"><div class="m-top"><div><div class="m-name">Americano <span class="m-name-ar">أمريكانو</span></div></div><div class="m-price">55 / 65 EGP</div></div><div class="m-desc">Hot water poured first, espresso on top to preserve crema. Clean and bright.</div><div class="m-footer"><span class="badge badge-hot">Hot</span><button class="add-btn" onclick="addItem('Americano',55)">+</button></div></div>
+        <div class="m-card"><div class="m-top"><div><div class="m-name">Cortado <span class="m-name-ar">كورتادو</span></div></div><div class="m-price">65 / 75 EGP</div></div><div class="m-desc">Equal parts espresso and steamed milk. The milk cuts the acidity without overpowering.</div><div class="m-footer"><span class="badge badge-hot">Hot</span><button class="add-btn" onclick="addItem('Cortado',65)">+</button></div></div>
+        <div class="m-card"><div class="m-top"><div><div class="m-name">Flat White <span class="m-name-ar">فلات وايت</span></div></div><div class="m-price">75 / 85 EGP</div></div><div class="m-desc">Ristretto over 120ml velvety microfoam. Smaller, stronger than a latte — about 150ml total.</div><div class="m-footer"><span class="badge badge-hot">Hot</span><button class="add-btn" onclick="addItem('Flat White',75)">+</button></div></div>
+        <div class="m-card"><div class="m-top"><div><div class="m-name">Cappuccino <span class="m-name-ar">كابتشينو</span></div></div><div class="m-price">75 / 85 EGP</div></div><div class="m-desc">1/3 espresso · 1/3 steamed milk · 1/3 dry foam. Dusted with cocoa. Classic ratio, perfectly balanced.</div><div class="m-footer"><span class="badge badge-hot">Hot</span><button class="add-btn" onclick="addItem('Cappuccino',75)">+</button></div></div>
+        <div class="m-card"><div class="m-top"><div><div class="m-name">Latte <span class="m-name-ar">لاتيه</span></div></div><div class="m-price">80 / 90 EGP</div></div><div class="m-desc">1–2 shots with 200ml silky microfoam. Light latte art. Oat milk available.</div><div class="m-footer"><span class="badge badge-hot">Hot</span><button class="add-btn" onclick="addItem('Latte',80)">+</button></div></div>
+      </div>
+
+      <div id="cat-cold" class="menu-cat menu-grid">
+        <div class="m-card"><div class="m-top"><div><div class="m-name">Iced Americano <span class="m-name-ar">أمريكانو بارد</span></div></div><div class="m-price">65 / 80 EGP</div></div><div class="m-desc">Espresso pulled stronger over ice and cold filtered water. Layered, refreshing, bold.</div><div class="m-footer"><span class="badge badge-cold">Cold</span><button class="add-btn" onclick="addItem('Iced Americano',65)">+</button></div></div>
+        <div class="m-card"><div class="m-top"><div><div class="m-name">Iced Latte <span class="m-name-ar">لاتيه بارد</span></div></div><div class="m-price">85 / 100 EGP</div></div><div class="m-desc">2 espresso shots poured gently over cold milk and ice for a beautiful layered pour.</div><div class="m-footer"><span class="badge badge-cold">Cold</span><button class="add-btn" onclick="addItem('Iced Latte',85)">+</button></div></div>
+        <div class="m-card"><div class="m-top"><div><div class="m-name">Iced Matcha <span class="m-name-ar">ماتشا بارد</span></div></div><div class="m-price">90 / 105 EGP</div></div><div class="m-desc">Ceremonial matcha whisked smooth, poured over cold milk and ice. Add vanilla syrup for sweetness.</div><div class="m-footer"><span class="badge badge-cold">Cold</span><button class="add-btn" onclick="addItem('Iced Matcha',90)">+</button></div></div>
+      </div>
+
+      <div id="cat-noncoffee" class="menu-cat menu-grid">
+        <div class="m-card"><div class="m-top"><div><div class="m-name">Herbal Tea <span class="m-name-ar">شاي أعشاب</span></div></div><div class="m-price">50 / 65 EGP</div></div><div class="m-desc">Chamomile, mint, or ginger. Steeped 3–5 minutes. Served with honey and lemon on the side.</div><div class="m-footer"><span class="badge badge-hot">Herbal</span><button class="add-btn" onclick="addItem('Herbal Tea',50)">+</button></div></div>
+        <div class="m-card"><div class="m-top"><div><div class="m-name">Matcha Latte <span class="m-name-ar">ماتشا لاتيه</span></div></div><div class="m-price">85 / 100 EGP</div></div><div class="m-desc">Ceremonial grade matcha whisked with 70°C water, topped with steamed milk and a dusting of matcha.</div><div class="m-footer"><span class="badge badge-new">No coffee</span><button class="add-btn" onclick="addItem('Matcha Latte',85)">+</button></div></div>
+      </div>
+
+      <div id="cat-signature" class="menu-cat menu-grid">
+        <div class="m-card"><div class="m-top"><div><div class="m-name">Honey Oat Latte <span class="m-name-ar">لاتيه العسل والشوفان</span></div></div><div class="m-price">95 / 110 EGP</div></div><div class="m-desc">2 espresso shots, raw honey dissolved while hot, steamed oat milk at 60°C, dusted with cinnamon.</div><div class="m-footer"><span class="badge badge-sig">Signature</span><button class="add-btn" onclick="addItem('Honey Oat Latte',95)">+</button></div></div>
+        <div class="m-card"><div class="m-top"><div><div class="m-name">Brown Sugar Latte <span class="m-name-ar">لاتيه سكر بني</span></div></div><div class="m-price">95 / 110 EGP</div></div><div class="m-desc">House brown sugar syrup stirred into espresso, topped with steamed milk and generous cinnamon dust.</div><div class="m-footer"><span class="badge badge-sig">Signature</span><button class="add-btn" onclick="addItem('Brown Sugar Latte',95)">+</button></div></div>
+        <div class="m-card"><div class="m-top"><div><div class="m-name">Seasonal Special <span class="m-name-ar">إصدار موسمي</span></div></div><div class="m-price">100 / 115 EGP</div></div><div class="m-desc">Rotating monthly. Ask your barista what's on today. Summer: Mango cold foam latte. Winter: Cardamom spiced.</div><div class="m-footer"><span class="badge badge-new">Limited</span><button class="add-btn" onclick="addItem('Seasonal Special',100)">+</button></div></div>
+      </div>
+
+      <div id="cat-addons" class="menu-cat" style="display:none">
+        <div class="addons-grid">
+          <div class="addon-card"><div><div class="addon-name">Extra Shot <span class="addon-name-ar">شوت إضافي</span></div></div><div class="addon-price">+15 EGP</div></div>
+          <div class="addon-card"><div><div class="addon-name">Oat Milk <span class="addon-name-ar">حليب شوفان</span></div></div><div class="addon-price">+15 EGP</div></div>
+          <div class="addon-card"><div><div class="addon-name">Vanilla Syrup <span class="addon-name-ar">شراب فانيليا</span></div></div><div class="addon-price">+10 EGP</div></div>
+          <div class="addon-card"><div><div class="addon-name">Caramel Syrup <span class="addon-name-ar">شراب كراميل</span></div></div><div class="addon-price">+10 EGP</div></div>
+          <div class="addon-card"><div><div class="addon-name">Hazelnut Syrup <span class="addon-name-ar">شراب هازلنت</span></div></div><div class="addon-price">+10 EGP</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="page-about" class="page">
+  <div class="section">
+    <div class="section-inner">
+      <div class="about-layout">
+        <div class="about-visual">
+          <div class="about-vis-inner">
+            <svg class="about-bean" width="90" height="110" viewBox="0 0 90 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="45" cy="55" rx="36" ry="48" fill="#C8962A" transform="rotate(-12 45 55)"/>
+              <ellipse cx="45" cy="55" rx="35.5" ry="47.5" fill="none" stroke="#1E1108" stroke-width="1.5" transform="rotate(-12 45 55)"/>
+              <path d="M30 22 Q45 55 30 88" stroke="#1E1108" stroke-width="3.5" stroke-linecap="round" fill="none" transform="rotate(-12 45 55)"/>
+            </svg>
+            <div style="color:var(--gold-lt);font-family:'Playfair Display',Georgia,serif;font-size:1rem;margin-top:1rem;letter-spacing:.06em">Gold Bean · Alexandria</div>
+          </div>
+        </div>
+        <div class="about-text">
+          <div class="s-tag">Our Story</div>
+          <h2>Born from a love of the honest cup</h2>
+          <p>Gold Bean started with one question: why does great specialty coffee have to be a luxury in Alexandria? We believed it didn't. So we built a café where young professionals and remote workers could find quality, calm, and a cup that actually tastes like something.</p>
+          <p>We source locally from Egyptian specialty roasters, keep our menu short and intentional, and train every barista to follow recipes with precision. Quality is our brand — not just a phrase.</p>
+          <p>Our space is work-friendly by design: strong Wi-Fi, good light, power outlets, and enough ambient warmth to make two hours feel like twenty minutes.</p>
+          <div class="values">
+            <div class="val"><div class="val-icon">🌱</div><div class="val-title">Quality over quantity</div><div class="val-desc">Short menu, high standards, no compromise</div></div>
+            <div class="val"><div class="val-icon">🤝</div><div class="val-title">Local sourcing</div><div class="val-desc">Egyptian specialty roasters, direct relationships</div></div>
+            <div class="val"><div class="val-icon">💻</div><div class="val-title">Work-friendly</div><div class="val-desc">Wi-Fi, outlets, and a calm productive space</div></div>
+            <div class="val"><div class="val-icon">📋</div><div class="val-title">Recipe precision</div><div class="val-desc">Every barista trained to exact spec</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LOCATION -->
+<div id="page-location" class="page">
+  <div class="section">
+    <div class="section-inner">
+      <div class="s-header">
+        <div class="s-tag">Find Us</div>
+        <div class="s-title">Come say hello in Alex</div>
+      </div>
+      <div class="loc-grid">
+        <div class="map-ph">
+          <svg width="48" height="60" viewBox="0 0 48 60" fill="none" style="position:relative;z-index:1" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 0C14.1 0 6 8.1 6 18c0 14 18 38 18 38s18-24 18-38C42 8.1 33.9 0 24 0z" fill="#C8962A"/>
+            <circle cx="24" cy="18" r="8" fill="#1E1108"/>
+          </svg>
+          <div class="map-caption">Gold Bean — Alexandria</div>
+        </div>
+        <div class="loc-info">
+          <div class="info-card">
+            <div class="open-pill"><span class="open-dot"></span>Open now</div>
+            <div class="ic-title">Hours</div>
+            <div class="hr-row today"><span class="hr-day">Monday (today)</span><span class="hr-time">7:00am – 9:00pm</span></div>
+            <div class="hr-row"><span class="hr-day">Tuesday – Thursday</span><span class="hr-time">7:00am – 9:00pm</span></div>
+            <div class="hr-row"><span class="hr-day">Friday</span><span class="hr-time">8:00am – 10:00pm</span></div>
+            <div class="hr-row"><span class="hr-day">Saturday – Sunday</span><span class="hr-time">8:00am – 10:00pm</span></div>
+          </div>
+          <div class="info-card">
+            <div class="ic-title">Contact & Location</div>
+            <div class="c-row"><div class="c-icon">📍</div>Smouha, Alexandria, Egypt</div>
+            <div class="c-row"><div class="c-icon">📞</div>+20 3 XXX XXXX</div>
+            <div class="c-row"><div class="c-icon">✉️</div>hello@goldbeancafe.eg</div>
+            <div class="c-row"><div class="c-icon">📶</div>Free high-speed Wi-Fi for all guests</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER -->
+<div id="page-order" class="page">
+  <div class="section">
+    <div class="section-inner">
+      <div class="s-header">
+        <div class="s-tag">Online Ordering</div>
+        <div class="s-title">Order ahead, skip the wait</div>
+        <div class="s-sub">Pickup ready in ~10 minutes.</div>
+      </div>
+      <div class="order-wrap">
+        <div>
+          <div class="order-toggle">
+            <button class="o-type active" onclick="setOType('pickup',this)">Pickup</button>
+            <button class="o-type" onclick="setOType('delivery',this)">Delivery</button>
+          </div>
+          <div id="del-addr" style="display:none;margin-bottom:1.4rem">
+            <div class="f-group"><label class="f-label">Delivery address</label><input class="f-input" placeholder="Street, building, apt" type="text"></div>
+          </div>
+          <div class="o-section-title">Popular picks</div>
+          <div class="o-items">
+            <div class="o-item"><div><div class="o-item-name">Honey Oat Latte</div><div class="o-item-desc">Espresso · Raw honey · Oat milk · Cinnamon</div></div><div class="o-right"><div class="qty"><button class="qty-btn" onclick="chQ('hol',-1,95)">−</button><span class="qty-n" id="q-hol">0</span><button class="qty-btn" onclick="chQ('hol',1,95)">+</button></div><div class="o-price">95 EGP</div></div></div>
+            <div class="o-item"><div><div class="o-item-name">Iced Latte</div><div class="o-item-desc">2 shots · Cold milk · Ice · Layered pour</div></div><div class="o-right"><div class="qty"><button class="qty-btn" onclick="chQ('il',-1,85)">−</button><span class="qty-n" id="q-il">0</span><button class="qty-btn" onclick="chQ('il',1,85)">+</button></div><div class="o-price">85 EGP</div></div></div>
+            <div class="o-item"><div><div class="o-item-name">Flat White</div><div class="o-item-desc">Ristretto · Velvety microfoam · 150ml</div></div><div class="o-right"><div class="qty"><button class="qty-btn" onclick="chQ('fw',-1,75)">−</button><span class="qty-n" id="q-fw">0</span><button class="qty-btn" onclick="chQ('fw',1,75)">+</button></div><div class="o-price">75 EGP</div></div></div>
+            <div class="o-item"><div><div class="o-item-name">Brown Sugar Latte</div><div class="o-item-desc">Espresso · Brown sugar syrup · Cinnamon dust</div></div><div class="o-right"><div class="qty"><button class="qty-btn" onclick="chQ('bsl',-1,95)">−</button><span class="qty-n" id="q-bsl">0</span><button class="qty-btn" onclick="chQ('bsl',1,95)">+</button></div><div class="o-price">95 EGP</div></div></div>
+            <div class="o-item"><div><div class="o-item-name">Iced Matcha</div><div class="o-item-desc">Ceremonial grade · Cold milk · Ice</div></div><div class="o-right"><div class="qty"><button class="qty-btn" onclick="chQ('im',-1,90)">−</button><span class="qty-n" id="q-im">0</span><button class="qty-btn" onclick="chQ('im',1,90)">+</button></div><div class="o-price">90 EGP</div></div></div>
+            <div class="o-item"><div><div class="o-item-name">Latte</div><div class="o-item-desc">1–2 shots · Silky microfoam · Latte art</div></div><div class="o-right"><div class="qty"><button class="qty-btn" onclick="chQ('lat',-1,80)">−</button><span class="qty-n" id="q-lat">0</span><button class="qty-btn" onclick="chQ('lat',1,80)">+</button></div><div class="o-price">80 EGP</div></div></div>
+          </div>
+          <div class="f-group"><label class="f-label">Special instructions</label><textarea class="f-input" rows="2" placeholder="Oat milk, no syrup, extra hot..."></textarea></div>
+          <div class="f-group"><label class="f-label">Pickup location</label><select class="f-select"><option>Smouha, Alexandria</option></select></div>
+        </div>
+        <div class="cart-panel">
+          <div class="cart-title">Your Order</div>
+          <div id="cart-items"><div class="cart-empty">Add items to get started</div></div>
+          <div id="cart-summary" style="display:none">
+            <div class="cart-row"><span>Subtotal</span><span id="c-sub">0 EGP</span></div>
+            <div class="cart-total-row"><span>Total</span><span id="c-total">0 EGP</span></div>
+          </div>
+          <div class="f-group" style="margin-top:1rem"><label class="f-label">Your name</label><input class="f-input" placeholder="For your order"></div>
+          <div class="f-group"><label class="f-label">Phone</label><input class="f-input" placeholder="+20 10X XXX XXXX" type="tel"></div>
+          <button class="checkout-btn" onclick="placeOrder()">Place Order →</button>
+          <div style="text-align:center;font-size:11px;color:var(--muted);margin-top:.6rem">Ready in ~10 min · Pay at counter</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STAFF LOGIN OVERLAY -->
+<div id="staff-overlay">
+  <div class="login-box">
+    <div class="login-logo">
+      <svg width="44" height="54" viewBox="0 0 44 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="22" cy="27" rx="17" ry="23" fill="#C8962A" transform="rotate(-12 22 27)"/>
+        <path d="M15 10 Q22 27 15 44" stroke="#1E1108" stroke-width="2.5" stroke-linecap="round" fill="none" transform="rotate(-12 22 27)"/>
+      </svg>
+    </div>
+    <div class="login-title">Staff Portal</div>
+    <div class="login-sub">Gold Bean Kitchen Display System</div>
+    <div class="login-err" id="login-err">Incorrect PIN. Please try again.</div>
+    <div class="f-group"><label class="f-label">Staff PIN</label><input class="f-input" type="password" id="staff-pin" placeholder="Enter 4-digit PIN" maxlength="4" oninput="if(this.value.length===4)doLogin()"></div>
+    <button class="login-btn" onclick="doLogin()">Access Kitchen Display</button>
+    <div class="login-hint">Demo PIN: <strong>1234</strong><br>In production, use your assigned staff PIN.<br>Sessions expire after 8 hours of inactivity.</div>
+    <div style="text-align:center;margin-top:1.2rem"><button onclick="hideStaff()" style="background:none;border:none;font-size:12.5px;color:var(--muted);cursor:pointer;font-family:inherit">← Back to site</button></div>
+  </div>
+</div>
+
+<!-- KITCHEN DASHBOARD -->
+<div id="kitchen">
+  <div class="kd-header">
+    <div class="kd-header-left">
+      <svg width="26" height="32" viewBox="0 0 26 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="13" cy="16" rx="10" ry="14" fill="#C8962A" transform="rotate(-12 13 16)"/>
+        <path d="M8 5 Q13 16 8 27" stroke="#1E1108" stroke-width="2" stroke-linecap="round" fill="none" transform="rotate(-12 13 16)"/>
+      </svg>
+      <div>
+        <div class="kd-title">Gold Bean — Kitchen Display</div>
+        <div class="kd-live"><span class="kd-live-dot"></span>Live orders</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="font-size:11.5px;color:rgba(255,255,255,.45)" id="kd-clock"></div>
+      <button class="kd-logout" onclick="logoutStaff()">Logout</button>
+    </div>
+  </div>
+  <div class="kd-body">
+    <div class="kd-stats">
+      <div class="kd-stat"><span class="kd-stat-num" id="kd-new-ct">0</span><span class="kd-stat-label">New</span></div>
+      <div class="kd-stat"><span class="kd-stat-num" id="kd-prep-ct">0</span><span class="kd-stat-label">In Prep</span></div>
+      <div class="kd-stat"><span class="kd-stat-num" id="kd-done-ct">0</span><span class="kd-stat-label">Ready</span></div>
+      <div class="kd-stat"><span class="kd-stat-num" id="kd-rev">0</span><span class="kd-stat-label">EGP Today</span></div>
+    </div>
+    <div class="kd-cols">
+      <div>
+        <div class="kd-col-title new">New orders</div>
+        <div id="col-new"></div>
+      </div>
+      <div>
+        <div class="kd-col-title prep">In preparation</div>
+        <div id="col-prep"></div>
+      </div>
+      <div>
+        <div class="kd-col-title done">Ready for pickup</div>
+        <div id="col-done"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const STAFF_PIN='1234';
+let orders=[];
+let orderCounter=1;
+let dailyRevenue=0;
+const qtys={};
+const prices={hol:95,il:85,fw:75,bsl:95,im:90,lat:80};
+const names={hol:'Honey Oat Latte',il:'Iced Latte',fw:'Flat White',bsl:'Brown Sugar Latte',im:'Iced Matcha',lat:'Latte'};
+let orderType='pickup';
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  const pg=document.getElementById('page-'+id);
+  if(pg){pg.classList.add('active');}
+  const nl=document.getElementById('nl-'+id);
+  if(nl)nl.classList.add('active');
+  document.getElementById('staff-overlay').classList.remove('show');
+  document.getElementById('kitchen').classList.remove('show');
+  window.scrollTo(0,0);
+}
+function switchCat(cat,btn){
+  document.querySelectorAll('.menu-cat').forEach(c=>{c.classList.remove('active');c.style.display='none'});
+  document.querySelectorAll('.menu-tab').forEach(t=>t.classList.remove('active'));
+  const el=document.getElementById('cat-'+cat);
+  if(el){el.style.display='grid';el.classList.add('active');}
+  btn.classList.add('active');
+  if(cat==='addons'){el.style.display='block';}
+}
+function setOType(t,btn){
+  orderType=t;
+  document.querySelectorAll('.o-type').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('del-addr').style.display=t==='delivery'?'block':'none';
+}
+function chQ(id,d,price){
+  qtys[id]=(qtys[id]||0)+d;
+  if(qtys[id]<0)qtys[id]=0;
+  document.getElementById('q-'+id).textContent=qtys[id];
+  updateCart();
+}
+function updateCart(){
+  const ci=document.getElementById('cart-items');
+  const cs=document.getElementById('cart-summary');
+  let html='';let sub=0;
+  Object.keys(qtys).forEach(id=>{
+    if(qtys[id]>0){
+      const p=prices[id]*qtys[id];sub+=p;
+      html+=`<div class="cart-row" style="padding:5px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text);font-weight:500">${names[id]} ×${qtys[id]}</span><span style="color:var(--gold);font-weight:600">${p} EGP</span></div>`;
+    }
+  });
+  if(!html){ci.innerHTML='<div class="cart-empty">Add items to get started</div>';cs.style.display='none';return;}
+  ci.innerHTML=html;cs.style.display='block';
+  document.getElementById('c-sub').textContent=sub+' EGP';
+  document.getElementById('c-total').textContent=sub+' EGP';
+}
+function addItem(name,price){showToast(name+' added ✓');}
+function placeOrder(){
+  const hasItems=Object.values(qtys).some(v=>v>0);
+  if(!hasItems){showToast('Add items first!');return;}
+  const itemList=Object.keys(qtys).filter(k=>qtys[k]>0).map(k=>({name:names[k],qty:qtys[k],price:prices[k]}));
+  const total=itemList.reduce((s,i)=>s+i.price*i.qty,0);
+  const order={id:'#GB-'+String(orderCounter++).padStart(3,'0'),items:itemList,total,type:orderType,name:'Customer',time:new Date(),status:'new'};
+  orders.push(order);
+  dailyRevenue+=total;
+  Object.keys(qtys).forEach(k=>qtys[k]=0);
+  document.querySelectorAll('.qty-n').forEach(el=>el.textContent='0');
+  updateCart();
+  renderKitchen();
+  showToast('Order placed! '+order.id+' — ready in ~10 min ✓');
+}
+function showStaffLogin(){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  document.getElementById('kitchen').classList.remove('show');
+  document.getElementById('staff-overlay').classList.add('show');
+  document.getElementById('staff-pin').value='';
+  document.getElementById('login-err').style.display='none';
+  window.scrollTo(0,0);
+}
+function doLogin(){
+  const pin=document.getElementById('staff-pin').value;
+  if(pin===STAFF_PIN){
+    document.getElementById('staff-overlay').classList.remove('show');
+    document.getElementById('kitchen').classList.add('show');
+    renderKitchen();
+    startClock();
+    window.scrollTo(0,0);
+  }else{
+    document.getElementById('login-err').style.display='block';
+    document.getElementById('staff-pin').value='';
+  }
+}
+function hideStaff(){
+  document.getElementById('staff-overlay').classList.remove('show');
+  showPage('home');
+}
+function logoutStaff(){
+  document.getElementById('kitchen').classList.remove('show');
+  showPage('home');
+}
+function advanceOrder(id){
+  const o=orders.find(x=>x.id===id);
+  if(!o)return;
+  if(o.status==='new')o.status='prep';
+  else if(o.status==='prep')o.status='done';
+  else if(o.status==='done'){orders=orders.filter(x=>x.id!==id);}
+  renderKitchen();
+}
+function removeOrder(id){
+  orders=orders.filter(o=>o.id!==id);
+  renderKitchen();
+}
+function renderKitchen(){
+  const cols={new:[],prep:[],done:[]};
+  orders.forEach(o=>cols[o.status]&&cols[o.status].push(o));
+  ['new','prep','done'].forEach(s=>{
+    const el=document.getElementById('col-'+s);
+    if(!cols[s].length){el.innerHTML='<div class="kd-empty">No orders</div>';return;}
+    el.innerHTML=cols[s].map(o=>{
+      const elapsed=Math.floor((new Date()-o.time)/60000);
+      const advLabel=o.status==='new'?'Start Prep →':o.status==='prep'?'Mark Ready →':'Complete ✓';
+      return`<div class="order-card">
+        <div class="oc-top"><div class="oc-id">${o.id}</div><span class="oc-type oc-${o.type}">${o.type}</span></div>
+        <div class="oc-name">${o.name}</div>
+        <ul class="oc-items">${o.items.map(i=>`<li>${i.name}${i.qty>1?' ×'+i.qty:''}</li>`).join('')}</ul>
+        <div class="oc-total">Total: ${o.total} EGP</div>
+        <div class="oc-time">${elapsed===0?'Just now':elapsed+'m ago'}</div>
+        <div class="oc-actions">
+          <button class="oc-btn oc-btn-adv" onclick="advanceOrder('${o.id}')">${advLabel}</button>
+          <button class="oc-btn oc-btn-del" onclick="removeOrder('${o.id}')">✕</button>
+        </div>
+      </div>`;
+    }).join('');
+  });
+  document.getElementById('kd-new-ct').textContent=cols.new.length;
+  document.getElementById('kd-prep-ct').textContent=cols.prep.length;
+  document.getElementById('kd-done-ct').textContent=cols.done.length;
+  document.getElementById('kd-rev').textContent=dailyRevenue;
+}
+function startClock(){
+  function tick(){
+    const now=new Date();
+    document.getElementById('kd-clock').textContent=now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+  }
+  tick();setInterval(tick,10000);
+}
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+renderKitchen();
+</script>
